@@ -1,0 +1,54 @@
+{
+  "total_registros": 818,
+  "total_variables": 49,
+  "ids_duplicados": [],
+  "edades_invalidas": [],
+  "celdas_vacias_por_columna": {
+    "NUMERO_INTENTOS": 139
+  },
+  "porcentaje_vacio_por_columna": {
+    "NUMERO_INTENTOS": 17.0
+  },
+  "valores_no_validos_si_no": {},
+  "no_aplica_por_columna": {
+    "TRASTORNO_DEPRESIVO": 22,
+    "TRASTORNO_DE_PERSONALIDAD": 22,
+    "TRASTORNO_BIPOLAR": 22,
+    "ESQUIZOFRENIA": 22,
+    "CONFLICTO_CON_PAREJA_O_EX_PAREJA": 1
+  },
+  "fechas_hecho_posteriores_a_notificacion": 22,
+  "cumple_minimo_R1": true,
+  "casos_por_sexo": {
+    "FEMENINO": 529,
+    "MASCULINO": 289
+  },
+  "casos_por_anio": {
+    "2023": 246,
+    "2022": 224,
+    "2021": 142,
+    "2020": 125,
+    "2024": 81
+  },
+  "meses_sin_notificaciones": {
+    "2020": [],
+    "2021": [],
+    "2022": [],
+    "2023": [
+      7,
+      8,
+      9
+    ],
+    "2024": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "registros": 818,
+  "edad": {
+    "n": 818,
+    "media": 23.99,
+    "mediana": 21.0,
+    "desviacion": 10.56,
+    "minimo": 6.0,
+    "maximo": 80.0,
+    "rango": 74.0,
+    "q1": 17.0,
+    "q3": 27.0,
+    "rango_intercuartil": 10.0,
+    "coef_variacion": 44.0
+  },
+  "numero_intentos": {
+    "n": 679,
+    "media": 1.49,
+    "mediana": 1.0,
+    "desviacion": 1.07,
+    "minimo": 0.0,
+    "maximo": 4.0,
+    "rango": 4.0,
+    "q1": 1.0,
+    "q3": 2.0,
+    "rango_intercuartil": 1.0,
+    "coef_variacion": 71.7
+  },
+  "casos_por_anio": {
+    "2020": 125,
+    "2021": 142,
+    "2022": 224,
+    "2023": 246,
+    "2024": 81
+  },
+  "variacion_anual_pct": {
+    "2021": 13.6,
+    "2022": 57.7,
+    "2023": 9.8,
+    "2024": -67.1
+  },
+  "porcentaje_mujeres": 64.7,
+  "porcentaje_intentos_previos": 50.7,
+  "porcentaje_ideacion_persistente": 39.6,
+  "correlacion_edad_numero_intentos": 0.05
+}
