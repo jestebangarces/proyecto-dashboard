@@ -26,7 +26,7 @@ from src.estadisticas import (
     variacion_porcentual,
 )
 
-# ------------------------------------------------------------------ configuración
+# configuración
 st.set_page_config(
     page_title="Intentos de suicidio · Tunja",
     page_icon="📊",
@@ -49,7 +49,7 @@ ORDEN_ESCOLARIDAD = [
     "SIN INFORMACION",
 ]
 
-# ------------------------------------------------------------------ estilo visual
+# estilo visual
 pio.templates["tunja"] = go.layout.Template(
     layout=dict(
         font=dict(family="Inter, Segoe UI, sans-serif", size=13, color=TEXTO),
@@ -156,7 +156,7 @@ def bonito(valor) -> str:
     return str(valor).capitalize()
 
 
-# ------------------------------------------------------------------ carga de datos
+#carga de datos
 @st.cache_data(show_spinner="Cargando datos…")
 def cargar(origen) -> pd.DataFrame:
     """Versión en caché de :func:`src.datos.cargar_datos` (evita releer el CSV en cada clic)."""
@@ -177,7 +177,7 @@ else:
     df = cargar(subido)
 
 
-# ------------------------------------------------------------------ utilidades
+# utilidades
 def renombrar_sexo(fig):
     """Leyendas 'Mujeres' / 'Hombres' en lugar de FEMENINO / MASCULINO."""
     fig.for_each_trace(lambda t: t.update(name=NOMBRE_SEXO.get(t.name, t.name)))
@@ -287,7 +287,7 @@ def hallazgos(datos: pd.DataFrame) -> list[str]:
     ]
 
 
-# ------------------------------------------------------------------ filtros (barra lateral)
+# filtros (barra lateral)
 anios = sorted(df["AÑO"].unique().tolist())
 sexos = sorted(df["SEXO"].unique().tolist())
 estratos = sorted(df["ESTRATO"].unique().tolist())
@@ -343,7 +343,7 @@ d = df[
 if excluir_flag:
     d = d[d["FLAG_FECHA_INCONSISTENTE"] == "NO"]
 
-# ------------------------------------------------------------------ encabezado
+# encabezado
 chips = [
     f"{df['FECHA_NOTIFICACION'].min():%d/%m/%Y} – {df['FECHA_NOTIFICACION'].max():%d/%m/%Y}",
     f"{len(d):,} de {len(df):,} registros",
@@ -376,7 +376,7 @@ if d.empty:
     st.warning("Ningún registro cumple los filtros. Amplía la selección en la barra lateral.")
     st.stop()
 
-# ------------------------------------------------------------------ indicadores
+# indicadores
 casos_anio = d.groupby("AÑO").size().reindex(sorted(d["AÑO"].unique()))
 c1, c2, c3, c4, c5 = st.columns(5)
 c1.metric("Casos", f"{len(d):,}", border=True, help="Total de registros con los filtros actuales. "
@@ -406,7 +406,7 @@ st.write("")
      "Mecanismo y atención", "Territorio", "Estadísticas (NumPy)", "Datos"]
 )
 
-# ------------------------------------------------------------------ storytelling
+# storytelling
 PREGUNTA_GUIA = (
     "¿Quiénes son las personas con intentos de suicidio notificados en Tunja entre 2020 y 2024, "
     "qué situaciones las rodean y cómo ha cambiado la cantidad de casos?"
@@ -417,9 +417,7 @@ with tab_historia:
                 unsafe_allow_html=True)
     st.caption("La historia se recalcula con los filtros de la barra lateral.")
 
-    # Acto 1: ¿cuántos y cuándo? -> solo años completos, para no comparar con un año parcial
-    # La completitud se mide sobre la base entera: un subgrupo pequeño puede no tener casos
-    # en algún mes sin que eso signifique que el año esté incompleto.
+
     por_anio = d.groupby("AÑO").size()
     completos = [a for a in anios_completos(df) if a in por_anio.index]
     with st.container(border=True):
@@ -543,7 +541,7 @@ with tab_historia:
 """
         )
 
-# ------------------------------------------------------------------ evolución
+# evolución
 with tab_tiempo:
     izq, der = st.columns([2, 3])
     with izq:
@@ -585,7 +583,7 @@ with tab_tiempo:
           "cuanto más oscuro es el cuadro, más casos hubo en ese mes de ese año. "
           "Los meses sin datos al final de la serie pueden reflejar un año incompleto, no ausencia de casos.")
 
-# ------------------------------------------------------------------ perfil
+# perfil
 with tab_perfil:
     a, b = st.columns(2)
     with a:
@@ -619,7 +617,7 @@ with tab_perfil:
     with b:
         panel("Afiliación a salud", barras_cat(d, "SEGURIDAD_SOCIAL"))
 
-# ------------------------------------------------------------------ factores
+# factores
 with tab_factores:
     por_sexo = st.toggle("Comparar mujeres y hombres", value=False)
     a, b = st.columns(2)
@@ -641,7 +639,7 @@ with tab_factores:
           "cada cuadro muestra qué % de las personas de ese grupo de edad presenta esa señal; "
           "más oscuro significa más frecuente.")
 
-# ------------------------------------------------------------------ mecanismo y atención
+# mecanismo y atención
 with tab_mecanismo:
     a, b = st.columns(2)
     with a:
@@ -662,7 +660,7 @@ with tab_mecanismo:
                           yaxis_title="% remitidos", yaxis_ticksuffix="%")
         panel("Remisión por año", fig)
 
-# ------------------------------------------------------------------ territorio
+# territorio
 with tab_territorio:
     a, b = st.columns([3, 2])
     with a:
@@ -696,7 +694,7 @@ with tab_territorio:
         st.info("Los barrios con pocos casos pueden variar por la forma en que se registró el nombre; "
                 "la hoja *Mapeo_Barrios* del Excel documenta cómo se unificaron.")
 
-# ------------------------------------------------------------------ estadísticas (NumPy)
+# estadísticas (NumPy)
 VARIABLES_NUMERICAS = {"EDAD": "Edad (años)", "NUMERO_INTENTOS": "Número de intentos"}
 AGRUPACIONES = {"Ninguna": None, "Sexo": "SEXO", "Año": "AÑO", "Grupo de edad": "GRUPO_EDAD",
                 "Estrato": "ESTRATO"}
@@ -789,7 +787,7 @@ with tab_stats:
         mime="application/json",
     )
 
-# ------------------------------------------------------------------ datos
+# datos
 with tab_datos:
     tabla = d.drop(columns=["MES", "PERIODO", "GRUPO_EDAD"])
     izq, der = st.columns([3, 1], vertical_alignment="bottom")
